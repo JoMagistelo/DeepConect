@@ -1,0 +1,88 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and metadata",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "birthdate": { "type": "string", "format": "date" },
+        "gender": { "type": "string" },
+        "seeking": { "type": "array", "items": { "type": "string" } },
+        "bio": { "type": "string" },
+        "photos": { "type": "array", "items": { "type": "string" } },
+        "location": { "type": "object" },
+        "profileAuthority": { "type": "number" },
+        "reputationWeight": { "type": "number" },
+        "interestsEmbedding": { "type": "array", "items": { "type": "number" } },
+        "personalityEmbedding": { "type": "array", "items": { "type": "number" } },
+        "interestTags": { "type": "array", "items": { "type": "string" } },
+        "relationshipGoal": { "type": "string" },
+        "datingPsychology": { "type": "string" },
+        "habits": { "type": "object" },
+        "onboardingCompleted": { "type": "boolean" },
+        "uiStyle": { "type": "string", "enum": ["holographic", "blackout", "red"] },
+        "zodiacSign": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "lastActiveAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["displayName", "birthdate", "gender", "seeking", "onboardingCompleted"]
+    },
+    "Swipe": {
+      "title": "Swipe",
+      "description": "Recording a swipe action",
+      "type": "object",
+      "properties": {
+        "swiperId": { "type": "string" },
+        "swipedId": { "type": "string" },
+        "direction": { "type": "string", "enum": ["L", "R", "S"] },
+        "matchScore": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["swiperId", "swipedId", "direction", "matchScore", "createdAt"]
+    },
+    "Match": {
+      "title": "Match",
+      "description": "A successful match between two users",
+      "type": "object",
+      "properties": {
+        "userIds": { "type": "array", "items": { "type": "string" } },
+        "finalScore": { "type": "number" },
+        "isSoulMatch": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "lastMessageAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Individual message in a match",
+      "type": "object",
+      "properties": {
+        "senderId": { "type": "string" },
+        "content": { "type": "string" },
+        "contentType": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "read": { "type": "boolean" }
+      }
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User documents"
+    },
+    "/swipes/{swipeId}": {
+      "schema": "Swipe",
+      "description": "Swipes history"
+    },
+    "/matches/{matchId}": {
+      "schema": "Match",
+      "description": "Match documents"
+    },
+    "/matches/{matchId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages subcollection"
+    }
+  }
+}

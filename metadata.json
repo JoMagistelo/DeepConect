@@ -1,0 +1,9 @@
+{
+  "name": "DeepConnect",
+  "description": "A high-fidelity dating platform featuring semantic compatibility matching, spiritual aura-inspired UI, and real-time deep connections.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}
